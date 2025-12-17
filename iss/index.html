@@ -461,15 +461,7 @@
       Uluslararası Uzay İstasyonu, ortak bilimsel deneylerin yapıldığı yörüngesel bir uzay laboratuvarıdır.
     </p>
 
-    <!-- FUTURISTIC ALBASPACE LOADING OVERLAY -->
-    <div id="loading-overlay">
-      <div class="loader-card">
-        <div class="loading-logo">
-          <img src="/assets/images/albaspace-logo.png" alt="AlbaSpace Logo" />
-          <span>ALBASPACE</span>
-        </div>
-
-        <div class="loader-orb">
+    <div class="loader-orb">
           <div class="orb-ring"></div>
           <div class="orb-core"></div>
         </div>
@@ -504,45 +496,6 @@
 
   <div data-include="/footer-tr.html"></div>
 
-  <!-- ЛОГИКА ДЛЯ ПРЕЛОАДЕРА -->
-  <script>
-    window.addEventListener("DOMContentLoaded", () => {
-      const viewer = document.querySelector("model-viewer");
-      const overlay = document.getElementById("loading-overlay");
-      const progressFill = document.querySelector(".progress-fill");
-
-      if (!viewer || !overlay || !progressFill) return;
-
-      const hideOverlay = () => {
-        if (overlay.classList.contains("fade-out")) return;
-        overlay.classList.add("fade-out");
-        setTimeout(() => {
-          if (overlay && overlay.parentNode) {
-            overlay.parentNode.removeChild(overlay);
-          }
-        }, 550);
-      };
-
-      viewer.addEventListener("progress", (event) => {
-        const total = event.detail && typeof event.detail.totalProgress === "number"
-          ? event.detail.totalProgress
-          : null;
-
-        if (total !== null) {
-          const percent = Math.max(0, Math.min(100, Math.round(total * 100)));
-          progressFill.style.width = percent + "%";
-        }
-      });
-
-      viewer.addEventListener("load", () => {
-        progressFill.style.width = "100%";
-        setTimeout(hideOverlay, 250);
-      });
-
-      // На всякий случай: если событие load не придёт (ошибка/сеть),
-      // убираем экран максимум через 20 секунд.
-      setTimeout(hideOverlay, 20000);
-    });
-  </script>
+  
 </body>
 </html>
